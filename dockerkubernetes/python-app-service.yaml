@@ -1,0 +1,16 @@
+# Python FastAPI Service (ClusterIP - Ingress용)
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-app-service
+  labels:
+    app: python-app
+spec:
+  type: ClusterIP
+  selector:
+    app: python-app
+  ports:
+    - name: http
+      port: 9999
+      targetPort: 9999
+      protocol: TCP 

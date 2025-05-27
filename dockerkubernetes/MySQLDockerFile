@@ -1,0 +1,15 @@
+# MySQL 8.0 기반 커스텀 이미지
+FROM mysql:8.0
+
+# 환경 변수 설정
+ENV MYSQL_ROOT_PASSWORD=kopo
+ENV MYSQL_USER=kopo
+ENV MYSQL_PASSWORD=kopo
+ENV MYSQL_DATABASE=timedb
+
+# 커스텀 설정 파일 복사
+COPY app/my_custom.cnf /etc/mysql/conf.d/
+COPY app/my_custom.cnf /etc/mysql/mysql.conf.d/
+
+# 포트 노출
+EXPOSE 3306

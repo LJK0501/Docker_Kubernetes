@@ -1,0 +1,38 @@
+# Python FastAPI Deployment (Worker 3개)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app-deployment
+  labels:
+    app: python-app
+spec:
+  replicas: 3  # Worker 3개
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+      - name: python-app
+        image: ljk501/python-time:latest
+        ports:
+        - containerPort: 9999
+        env:
+        - name: MYSQL_HOST
+          value: "mysql-container"
+        - name: MYSQL_USER
+          value: "kopo"
+        - name: MYSQL_PASSWORD
+          value: "kopo"
+        - name: MYSQL_DATABASE
+          value: "timedb"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"  
